@@ -10,15 +10,15 @@ class TweetManager:
 	@staticmethod
 	def getTweets(tweetCriteria, receiveBuffer=None, bufferLength=100, proxy=None):
 		refreshCursor = ''
-	
+		
 		results = []
 		resultsAux = []
 		cookieJar = http.cookiejar.CookieJar()
 
 		active = True
-# WHY DO WE NEED BOTH A WHILE AND A FOR??????
+
 		while active:
-			json = TweetManager.getJsonReponse(tweetCriteria, refreshCursor, cookieJar, proxy)
+			json = TweetManager.getJsonResponse(tweetCriteria, refreshCursor, cookieJar, proxy)
 			if len(json['items_html'].strip()) == 0:
 				break
 
@@ -30,9 +30,14 @@ class TweetManager:
 			
 			for tweetHTML in tweets:
 				tweetPQ = PyQuery(tweetHTML)
+				# skip the tweet if it is a reply
+				if tweetPQ("div.tweet").attr("data-is-reply-to") == 'true':
+					continue
 				tweet = models.Tweet()
 				
-				usernameTweet = tweetPQ("span.username.js-action-profile-name b").text();
+				# the original line did not return a username
+				# usernameTweet = tweetPQ("span.username.js-action-profile-name b").text();
+				usernameTweet = tweetPQ("div.tweet").attr("data-screen-name")
 				txt = re.sub(r"\s+", " ", tweetPQ("p.js-tweet-text").text().replace('# ', '#').replace('@ ', '@'));
 				retweets = int(tweetPQ("span.ProfileTweet-action--retweet span.ProfileTweet-actionCount").attr("data-tweet-stat-count").replace(",", ""));
 				favorites = int(tweetPQ("span.ProfileTweet-action--favorite span.ProfileTweet-actionCount").attr("data-tweet-stat-count").replace(",", ""));
@@ -84,7 +89,7 @@ class TweetManager:
 		return results
 	
 	@staticmethod
-	def getJsonReponse(tweetCriteria, refreshCursor, cookieJar, proxy):
+	def getJsonResponse(tweetCriteria, refreshCursor, cookieJar, proxy):
 		url = "https://twitter.com/i/search/timeline?f=tweets&q=%s&src=typd&%smax_position=%s"
 		
 		urlGetData = ''
