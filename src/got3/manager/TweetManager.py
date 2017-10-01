@@ -1,3 +1,4 @@
+# for Python 3, need urllib instead of urllib2
 import urllib.request, urllib.parse, urllib.error, json, re, datetime, sys, http.cookiejar
 from .. import models
 from pyquery import PyQuery
