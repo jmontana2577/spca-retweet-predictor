@@ -5,7 +5,8 @@ This is the first phase of my capstone project for <a href="https://generalassem
 - `data` folder: contains most of the pickle files used in this project (some were too large to include in repo)
 - `ipynb` folder: contains 9 jupyter notebooks, one for each step of the project (except two notebooks for first step)
 - `src` folder: contains a <a href="https://github.com/Jefferson-Henrique/GetOldTweets-python">repo</a> from Jefferson Henrique that was used to gather tweets. I modified the `got3` functionality some to work in Python 3.
-- **ADD INFO ABOUT PRESENTATION AND ITS PDF**
+- `non-tech-summary.pdf`: 13-page PDF printout of Google Slides non-technical summary presentation (includes notes)
+- `non-tech-summary-google-slides.md`: a markdown file that contains a link to the <a href="https://docs.google.com/presentation/d/1g8UZ5UNSWR-gyqtMHZb2e5vkQFJl9hq3tPrGgMc3DK0/edit?usp=sharing">Non-technical Summary Presentation</a>
 
 ## Project Background Info
 My wife and I volunteered for 5 years at the San Francisco SPCA and when we could no longer keep the time commitment, we remained donors to the organization. We also adopted <a href="https://photos.app.goo.gl/m74JvdTSZyvDNxbK2">Kahlua</a> in April 2015 when she was 8 months old. I embarked upon this project in an effort to use my data science skills to benefit the SF SPCA. 
